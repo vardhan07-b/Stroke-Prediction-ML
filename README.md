@@ -1,43 +1,49 @@
-# Stroke Prediction using Machine Learning
+# Stroke Prediction Web App 🧠💡
+A Flask-based web application that predicts stroke risk based on user input.
 
-## Overview
-A machine learning-based web application that predicts the probability of stroke using patient health parameters. The application helps identify individuals at higher risk and supports early intervention.
+## 📌 Features
+- User inputs age, hypertension, heart disease, glucose level, BMI and other.
+- Interactive web app using Flask.
+- A trained ML model that predicts stroke risk based on user input.
 
-## Features
+## 🛠️ Installation
+1. Clone the repository.
+2. Install dependencies: `pip install -r requirements.txt`
+3. Run the application: `python webapp/app.py`
+4. Access the app in the open browser: `http://127.0.0.1:5000/`
 
-- Data preprocessing
-- Feature Engineering
-- Machine Learning model
-- Stroke prediction
-- Flask Web Application
-- User-friendly interface
+## 📊 Model
+- Trained using `scikit-learn`
+- Scaled inputs using `StandardScaler`
+- Model stored as `Models/stroke_model.pkl`
 
-## Tech Stack
+## 📁 File Structure
+stroke-prediction-app/
+│── Data/
+│   ├── healthcare-dataset-stroke-data.csv
+│── Models/
+│   ├── stroke_model.pkl
+│   ├── scaler.pkl
+│── Notebooks/
+│   ├── data_preprocessing.ipynb
+│   ├── feature_engineering.ipynb
+│   ├── model_training.ipynb
+│   ├── explainability.ipynb
+│── Webapp/
+│   ├── templates/
+│   │   ├── home.html
+│   │   ├── result.html
+│   │   ├── error.html
+│   ├── static/
+│   │   ├── css/
+│   │   │   ├── styles.css
+│   │   ├── js/
+│   │   │   ├── script.js
+│   │── app.py
+│   │── utils.py
+│── requirements.txt
+│── README.md
+│── .gitignore
 
-- Python
-- Flask
-- Pandas
-- NumPy
-- Scikit-learn
-- HTML
-- CSS
-- JavaScript
-
-## Dataset
-
-Stroke Prediction Dataset
-
-## Project Structure
-
-app.py
-templates/
-static/
-model.pkl
-requirements.txt
-
-## How to Run
-
-```bash
-pip install -r requirements.txt
-
-python app.py
+## 📜 License
+MIT License
