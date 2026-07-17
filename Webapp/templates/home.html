@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Stroke Risk Assessment</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+
+<body>
+<div class="app-container">
+
+    <header class="app-header">
+        <h1>🧠 AI Stroke Risk Assessment</h1>
+        <p>Preliminary clinical screening tool</p>
+    </header>
+
+    <form class="medical-form" id="predictionForm" action="/predict" method="post">
+     
+        <div class="form-section">
+            <h3>👤 Personal Details</h3>
+
+            <label>Gender</label>
+            <select name="gender" required>
+                <option value="0">Female</option>
+                <option value="1">Male</option>
+            </select>
+
+            <label>Age (0–100)</label>
+            <input type="number" name="age" min="0" max="100" required>
+        </div>
+
+        <div class="form-section">
+            <h3>❤️ Medical History</h3>
+
+            <label>Hypertension</label>
+            <select name="hypertension" required>
+                <option value="0">No</option>
+                <option value="1">Yes</option>
+            </select>
+
+            <label>Heart Disease</label>
+            <select name="heart_disease" required>
+                <option value="0">No</option>
+                <option value="1">Yes</option>
+            </select>
+
+            <label>Ever Married</label>
+            <select name="ever_married" required>
+                <option value="0">No</option>
+                <option value="1">Yes</option>
+            </select>
+        </div>
+
+        <div class="form-section">
+            <h3>🏢 Lifestyle</h3>
+
+            <label>Work Type</label>
+            <select name="work_type" required>
+                <option value="0">Government Job</option>
+                <option value="1">Private</option>
+                <option value="2">Self-employed</option>
+                <option value="3">Children</option>
+            </select>
+
+            <label>Residence Type</label>
+            <select name="Residence_type" required>
+                <option value="0">Rural</option>
+                <option value="1">Urban</option>
+            </select>
+
+            <label>Smoking Status</label>
+            <select name="smoking_status" required>
+                <option value="0">Unknown</option>
+                <option value="1">Formerly Smoked</option>
+                <option value="2">Never Smoked</option>
+                <option value="3">Smokes</option>
+            </select>
+        </div>
+
+        <div class="form-section">
+            <h3>🧪 Clinical Measurements</h3>
+
+            <label>Average Glucose Level (mg/dL)</label>
+            <input type="number" step="any" name="avg_glucose_level" min="50" max="300" required>
+
+            <label>BMI (10–60)</label>
+            <input type="number" step="any" name="bmi" min="10" max="60" required>
+        </div>
+
+        <button type="submit" class="submit-btn">🔍 Assess Risk</button>
+
+        <p class="disclaimer">
+            ⚠️ This is an educational screening tool, not a diagnostic system.
+        </p>
+
+    </form>
+
+</div>
+</body>
+</html>

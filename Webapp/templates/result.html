@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stroke Risk Assessment</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+
+    <style>
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: linear-gradient(135deg, #eef2f7, #f9fbfd);
+            padding: 30px 10px;
+            text-align: center;
+        }
+
+        .result-container {
+            background: #ffffff;
+            max-width: 720px;
+            margin: auto;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        }
+
+        h1 {
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+
+        .subtitle {
+            color: #6c757d;
+            font-size: 15px;
+            margin-bottom: 25px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            background: #e9ecef;
+            border-radius: 12px;
+            overflow: hidden;
+            margin: 15px 0;
+        }
+
+        .progress-fill {
+            height: 32px;
+            line-height: 32px;
+            font-weight: bold;
+            color: white;
+            transition: width 0.7s ease-in-out;
+        }
+
+        .low { background: linear-gradient(to right, #28a745, #5dd879); }
+        .high { background: linear-gradient(to right, #dc3545, #ff6b6b); }
+
+        .risk-card {
+            margin-top: 20px;
+            padding: 18px;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .risk-low {
+            background-color: #eafaf1;
+            color: #1e7e34;
+            border-left: 6px solid #28a745;
+        }
+
+        .risk-high {
+            background-color: #fdecea;
+            color: #a71d2a;
+            border-left: 6px solid #dc3545;
+        }
+
+        .risk-scale {
+            display: flex;
+            justify-content: space-between;
+            margin: 25px 0 10px;
+        }
+
+        .scale-item {
+            flex: 1;
+            padding: 10px;
+            margin: 0 4px;
+            border-radius: 8px;
+            font-size: 14px;
+            color: white;
+        }
+
+        .scale-low { background: #28a745; }
+        .scale-medium { background: #ffc107; color: #333; }
+        .scale-high { background: #dc3545; }
+
+        .reasons-box {
+            text-align: left;
+            margin-top: 20px;
+            background: #f8f9fa;
+            padding: 18px;
+            border-radius: 10px;
+        }
+
+        .reasons-box h3 {
+            margin-bottom: 10px;
+            color: #343a40;
+        }
+
+        .reasons-box li {
+            margin: 8px 0;
+            font-size: 15px;
+        }
+
+        /* 🔥 ALERT */
+        .alert-box {
+            background: #fdecea;
+            color: #a71d2a;
+            padding: 15px;
+            border-radius: 10px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        /* 🔥 BUTTON GROUP */
+        .doctor-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 22px;
+            border-radius: 8px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            color: white;
+            text-decoration: none;
+        }
+
+        .doctor-btn { background: #17a2b8; }
+        .nearby-btn { background: #dc3545; }
+        .secondary-btn { background: #007bff; margin-top: 25px; }
+
+        .btn:hover { opacity: 0.9; }
+
+        @media (max-width: 600px) {
+            .doctor-actions {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="result-container">
+    <h1>🧠 Stroke Risk Assessment</h1>
+    <p class="subtitle">AI-based preliminary health screening report</p>
+
+    <h3>📊 Risk Probability</h3>
+    <div class="progress-bar">
+        <div class="progress-fill {% if prediction == 1 %}high{% else %}low{% endif %}"
+             style="width: {{ probability }}%;">
+            {{ probability }}%
+        </div>
+    </div>
+
+    {% if prediction == 1 %}
+        <div class="risk-card risk-high">
+            🚨 HIGH RISK OF STROKE
+        </div>
+
+         
+
+        <!-- 🔥 NEW BUTTONS -->
+        <div class="doctor-actions">
+            <button onclick="window.location.href='/doctors'" class="btn doctor-btn">
+                👨‍⚕️ View Available Doctors
+            </button>
+
+            <button onclick="window.location.href='/consult'" class="btn nearby-btn">
+                📍 Find Nearby Doctors
+            </button>
+        </div>
+
+    {% else %}
+        <div class="risk-card risk-low">
+            ✅ LOW RISK OF STROKE
+        </div>
+    {% endif %}
+
+    <div class="risk-scale">
+        <div class="scale-item scale-low">Low (0–30%)</div>
+        <div class="scale-item scale-medium">Moderate (30–60%)</div>
+        <div class="scale-item scale-high">High (60–100%)</div>
+    </div>
+
+    <div class="reasons-box">
+        <h3>🔍 Key Factors Affecting Risk</h3>
+        <ul>
+            {% for reason in reasons %}
+                <li>{{ reason }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <!-- ✅ SINGLE BUTTON -->
+    <a href="{{ url_for('home') }}" class="btn secondary-btn">
+        🔄 New Assessment
+    </a>
+
+</div>
+
+</body>
+</html>

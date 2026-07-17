@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Available Doctors</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            font-family: Arial;
+            background: #f4f7fb;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+        }
+
+        .doctor-card {
+            background: white;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .back-btn {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px;
+            background: #007bff;
+            color: white;
+            border-radius: 8px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>👨‍⚕️ Available Neurologists</h1>
+
+    {% for doc in doctors %}
+    <div class="doctor-card">
+        <h3>{{ doc.name }}</h3>
+        <p><b>Specialization:</b> {{ doc.specialization }}</p>
+        <p><b>Hospital:</b> {{ doc.hospital }}</p>
+        <p><b>Location:</b> {{ doc.location }}</p>
+        <p><b>Contact:</b> 📞 {{ doc.contact }}</p>
+    </div>
+    {% endfor %}
+
+    <button onclick="window.history.back()" class="back-btn">
+    ⬅ Back
+</button>
+</div>
+
+</body>
+</html>
